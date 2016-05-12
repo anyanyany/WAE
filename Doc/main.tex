@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\frenchspacing
+\setcounter{tocdepth}{2}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{float}
+
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\linespread{1.3}
+\frenchspacing
+
+\setcounter{tocdepth}{3}
+
+\begin{document}
+
+% -------------------------- TITLEPAGE -------------------------- %
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{center}
+
+% university
+\textsc{\LARGE Politechnika Warszawska}\\[0.5cm]
+\textsc{\Large Wydział Matematyki i Nauk Informacyjnych}\\[1cm]
+
+% logo
+\includegraphics[width=2cm, height=2cm]{logo}\\[1cm]
+
+
+\textsc{\Huge Wstęp do algorytmów ewolucyjnych}\\[0.5cm]
+
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \LARGE \bfseries Wielostartowy algorytm wspinaczkowy dla ciągłych zadań optymalizacji o różnych wymiarowościach}\\[0.2cm]
+ 
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{  \bfseries Specyfikacja wstępna}\\[2.5cm]
+
+% author
+\begin{flushright}
+	\Large \emph{Autorzy:}\\[0.5cm]
+Anna \textsc{Zawadzka}\\
+Piotr \textsc{Waszkiewicz}\\[1.5cm]
+\end{flushright} 
+
+% date
+\vfill
+{\large \today}\\[1cm]
+	
+\end{center}
+
+\end{titlepage}
+
+\newpage
+%----------------------------------------------------------------------------------------
+\section{Opis problemu}
+
+Celem projektu jest zbadanie zachowania wielostartowego algorytmu wspinaczkowego dla ciągłych zadań optymalizacji o różnych wymiarowościach z uwzględnieniem rożnych strategii losowania punktów startowych: losowanie z rozkładem równomiernym, przeszukiwanie po hipersiatce, poisson-disc. Testy przeprowadzone będą na benchmarku CEC 2013.\\
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Metoda realizacji zadania}
+
+\end{document}
