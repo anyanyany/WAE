@@ -8,6 +8,7 @@
 \graphicspath{ {images/} }
 \usepackage{float}
 \usepackage{listings}
+\usepackage{hyperref}
 
 \usepackage{booktabs}% http://ctan.org/pkg/booktabs
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
@@ -66,10 +67,7 @@ Piotr \textsc{Waszkiewicz}\\[1.5cm]
 %----------------------------------------------------------------------------------------
 \section{Opis problemu}
 
-Celem projektu jest zbadanie zachowania wielostartowego algorytmu wspinaczkowego dla ciągłych zadań optymalizacji o różnych wymiarowościach z uwzględnieniem rożnych strategii losowania punktów startowych: losowanie z rozkładem równomiernym, przeszukiwanie po hipersiatce, poisson-disc. Testy przeprowadzone będą na benchmarku CEC 2013.\\
-
-
-%----------------------------------------------------------------------------------------
+Celem projektu jest zbadanie zachowania wielostartowego algorytmu wspinaczkowego dla ciągłych zadań optymalizacji o różnych wymiarowościach z uwzględnieniem rożnych strategii losowania punktów startowych: losowanie z rozkładem równomiernym, przeszukiwanie po hipersiatce, poisson-disc. Testy przeprowadzone będą na benchmarku CEC 2013.
 
 \section{Metoda realizacji zadania}
 
@@ -101,13 +99,22 @@ W niektórych problemach mogą pomóc wielokrotne starty z przypadkowych punktó
 
 
 \subsection{Strategie losowania punktów startowych}
+Punkty startowe wybierane będą przy pomocy następujących metod:
+
 \subsubsection{Losowanie z rozkładem równomiernym}
+Rozkład równomierny gwarantuje wybranie punktu z określonej n-wymiarowej przestrzeni z jednakowym prawdopodobieństwem. Środowisko R dostarcza funkcję \textit{runif(n, a, b)}, która zwraca n liczb z przedziału [a,b] z rozkładu równomiernego, które traktowane będą jako kolejne współrzędne generowanego punktu.
+
 \subsubsection{Przeszukiwanie po hipersiatce}
-\subsubsection{Poisson-disc}
+Metoda ta zakłada istnienie n-wymiarowej siatki. Przecięcia linii tejże siatki wyznaczają kolejne punkty, będące punktami startowymi algorytmu.
 
-\subsection{Koncepcja przeprowadzenia eksperymentu}
+\subsubsection{Poisson Disc Sampling}
+Technika Poisson Disc generuje zbiór punktów o zadanej liczności w n-wymiarowej przestrzeni, ściśle upakowanych, lecz odległych od siebie co najmniej o podaną minimalną odległość. Algorytm zrealizowany zostanie zgodny z poniższym dokumentem:\\
+\url{http://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf}
 
-Początek doświadczenia - losujemy N punktów startowych \\
+\section{Koncepcja przeprowadzenia eksperymentu}
+
+Pierwszym krokiem doświadczenia będzie wylosowanie N punktów startowych przy pomocy trzech opisanych powyżej metod. Punkty te będą badane dla każdej z funkcji celu z pakietu CEC2013. \\
+
 Wykonujemy 1000 iteracji i spisujemy wartości najlepszych punktów \\
 Takich kroków wykonujemy łącznie 1000 (czyli 1M iteracji) po czym kończymy \\
 Porównujemy wyniki dla różnych wersji wyboru punktów startowych \\
