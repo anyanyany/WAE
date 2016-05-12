@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{float}
+\usepackage{listings}
 
 \usepackage{booktabs}% http://ctan.org/pkg/booktabs
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
@@ -71,11 +72,44 @@ Celem projektu jest zbadanie zachowania wielostartowego algorytmu wspinaczkowego
 %----------------------------------------------------------------------------------------
 
 \section{Metoda realizacji zadania}
+
 \subsection{Algorytm wspinaczkowy}
+
+W projekcie wykorzystany zostanie algorytm wspinaczkowy w wersji z wyborem następnika na podstawie sąsiadów najlepszego, znalezionego dotychczas punktu.
+
+\begin{lstlisting}[mathescape][language=R]
+x $\leftarrow$ $x_{0}$
+H $\leftarrow$ {$x_{0}$}
+while !stop
+	y $\leftarrow$ randomNeighbor(x, $\delta$)
+	if cec2013(i, y) > cec2013(i, x)
+		x $\leftarrow$ y
+	H $\leftarrow$ H $\cup$ {y}
+\end{lstlisting}
+Zbiór H zawiera wszystkie punkty powstałe podczas działania algorytmu i jest nazywany \textit{śladem algorytmu}. Przydaje się podczas graficznej reprezentacji rozłożenia populacji w przestrzeni. W ramach projektu nie będzie on wykorzystywany ze względu na wielowymiarowość problemów, często niemożliwą do narysowania. \\
+Funkcja randomNeighbor(x, $\delta$) zwraca losowy punkt w sąsiedztwie x-a, znajdujący się w odległości nie większej niż $\delta$ od x-a. Do obliczania odległości stosowana będzie metryka euklidesowa. \\
+Funkcja cec2013(i, z) dostępna jest w ramach pakietu CEC2013 i zwraca wartość funkcji 'i' w punkcie 'z'. Traktowana jako funkcja celu.
+
+Podstawowymi problemami jakie można napotkać podczas działania algorytmu są:
+\begin{itemize}
+	\item Lokalne minima
+	\item Plateaux, czyli równiny
+	\item Wąskie grzbiety
+\end{itemize}
+
+W niektórych problemach mogą pomóc wielokrotne starty z przypadkowych punktów, stąd cel tego zadania - sprawdzenie które podejście może zminimalizować ryzyko nieodnalezienia globalnego, poszukiwanego ekstremum.
+
+
 \subsection{Strategie losowania punktów startowych}
 \subsubsection{Losowanie z rozkładem równomiernym}
 \subsubsection{Przeszukiwanie po hipersiatce}
 \subsubsection{Poisson-disc}
+
 \subsection{Koncepcja przeprowadzenia eksperymentu}
+
+Początek doświadczenia - losujemy N punktów startowych \\
+Wykonujemy 1000 iteracji i spisujemy wartości najlepszych punktów \\
+Takich kroków wykonujemy łącznie 1000 (czyli 1M iteracji) po czym kończymy \\
+Porównujemy wyniki dla różnych wersji wyboru punktów startowych \\
 
 \end{document}
