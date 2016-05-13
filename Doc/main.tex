@@ -115,8 +115,6 @@ Technika Poisson Disc generuje zbiór punktów o zadanej liczności w n-wymiarow
 
 Pierwszym krokiem doświadczenia będzie wylosowanie N punktów startowych przy pomocy trzech opisanych powyżej metod. Punkty te będą badane dla każdej z funkcji celu z pakietu CEC2013. \\
 
-Wykonujemy 1000 iteracji i spisujemy wartości najlepszych punktów \\
-Takich kroków wykonujemy łącznie 1000 (czyli 1M iteracji) po czym kończymy \\
-Porównujemy wyniki dla różnych wersji wyboru punktów startowych \\
+Następnym krokiem będzie uruchomienie algorytmu wspinaczkowego dla każdego z początkowych punktów startowych. Co 1000 kroków programu (czyli co 1000 losowań nowego punktu sąsiadującego z najlepszy, dotychczas znalezionym rozwiązaniem) wartość funkcji celu dla najlepszego osobnika z populacji będzie notowana. Zakończenie obliczeń jest planowane po uzyskaniu 1000 wyników w trakcie działania programu. Następnie nastąpi wyliczenie wartości średnich dla elementów w wektorze na podstawie wyników otrzymanych dla każdego z punktów startowych. Obliczenia powtórzone będą dla każdej z trzech metod wybierania punktów startowych a otrzymane wyniki zestawione, porównane i opisane. Na koniec zaprezentowane zostaną wyciągnięte wnioski.
 
 \end{document}

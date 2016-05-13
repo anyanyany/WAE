@@ -1,0 +1,8 @@
+\BOOKMARK [1][-]{section.1}{Opis problemu}{}% 1
+\BOOKMARK [1][-]{section.2}{Metoda realizacji zadania}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Algorytm wspinaczkowy}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Strategie losowania punkt\363w startowych}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Losowanie z rozk\233adem r\363wnomiernym}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Przeszukiwanie po hipersiatce}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Poisson Disc Sampling}{subsection.2.2}% 7
+\BOOKMARK [1][-]{section.3}{Koncepcja przeprowadzenia eksperymentu}{}% 8
