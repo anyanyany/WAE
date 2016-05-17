@@ -1,3 +1,6 @@
+#install.packages("gtools");
+#library("gtools");
+
 GetPointsUniformDistribution = function(dimension,N,a,b)
 {
   points=list();
@@ -18,6 +21,8 @@ GetPointsHyperMesh = function(dimension,N,a,b)
   {
     values[i]=a+(i-1)*h;
   }
+  whichPoints=round(runif(dimension, 1, scale),digits=0)
+  print(whichPoints);
   allPoints=permutations(scale, dimension, v=values, set=TRUE, repeats.allowed=TRUE)
   for(i in c(1:N)) #obcina sie nadwyzka punktow
   {
