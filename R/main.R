@@ -1,12 +1,17 @@
+#library("cec2013");
+#source("hillClimbing.R");
+#source("getPoints.R");
+#source("randomNeighbor.R");
+
 main=function() 
 {
   dimensions=c(2,5,10,20,30,40,50,60,70,80,90,100);
   functions=c(1:28);
   N=10; #N-ile punktow
-  delta=0.6;
+  delta=0.2;
   a=-100;
   b=100;
-  results=array(dim = c(length(dimensions),3,length(functions),N));
+  results=array(dim = c(length(dimensions),3,length(functions),N)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdek funkcji i kazdego punktu startowego
   
   for(d in dimensions)
   {
@@ -34,5 +39,4 @@ main=function()
     }
   }
   return (results);
-  
 }
