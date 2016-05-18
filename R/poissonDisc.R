@@ -1,18 +1,16 @@
 A = -1
 B = 1
 dim = 2
+x = list()
+y = list()
 
-plotPoints = function()
+plotPoints = function(accuracy)
 {
-    plot(A:B, A:B, type="n")
-    #plot(x, y, type="p")
-    x = list()
-    y = list()
-    grid = generatePoints(1e-2)
-    print('Plotting!')
-    for(i in c(1, length(grid[1,,1])))
+    plot(A:B, A:B, type="n", ylim=c(-1.1,1))
+    grid = generatePoints(accuracy)
+    for(i in c(1:length(grid[1,,1])))
     {
-        for(j in c(1, length(grid[1,,1])))
+        for(j in c(1:length(grid[1,,1])))
         {
             if(all(grid[i, j,] == c(-1, -1)) == FALSE)
             {
@@ -40,14 +38,14 @@ generatePoints = function(minDist)
 {
     cellSize = minDist / sqrt(dim)
     cellNum = (B - A) / cellSize
-    grid = array(c(-1, -1), dim = c(cellNum, cellNum, dim))
+    grid = array(c(-1, -1), dim = c(cellNum + 1, cellNum + 1, dim))
 
     activeList = list()
     initialPoint = runif(dim, A, B)
     position = pointToGridCell(initialPoint, cellSize)
     grid[position[1], position[2], ] = initialPoint
     activeList[[length(activeList) + 1]] <- initialPoint
-    poissonDisc(minDist, cellSize, grid, activeList)
+    grid = poissonDisc(minDist, cellSize, grid, activeList)
 
     return (grid)
 }
@@ -55,16 +53,17 @@ generatePoints = function(minDist)
 poissonDisc = function(minDist, cellSize, grid, activeList)
 {
     # Until active list is not empty
-    it = 1000
-    while(length(activeList) != 0 && it > 0)
+    while(length(activeList) > 0 )
     {
-        it = it-1
         # Randomize current active point
         listLength = length(activeList)
         index = round(runif(1, 1, listLength))
         activePoint = activeList[[index]]
         activeList[[index]] = NULL
         isStillActive = FALSE
+
+        # print(it)
+        # print(listLength)
 
         # Select k neighbours for point
         for(i in c(1:30))
@@ -74,9 +73,9 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
             nPointCell = pointToGridCell(nPoint, cellSize)
             delta = ceiling(minDist / cellSize) # number of cells to look up
             isOk = TRUE
-            for(j in c(nPointCell[1] - delta, nPointCell[1] + delta))
+            for(j in c((nPointCell[1] - delta) : (nPointCell[1] + delta)))
             {
-                for(k in c(nPointCell[2] - delta, nPointCell[2] + delta))
+                for(k in c((nPointCell[2] - delta) : (nPointCell[2] + delta)))
                 {
                     if(j <= 0 || j > length(grid[1,,1]) || k <= 0 || k > length(grid[1,,1]) || all(grid[j, k, ] == c(-1, -1)) == TRUE)
                         next()
@@ -92,6 +91,9 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
 
             if(isOk)
             {
+                x[[length(x) + 1]] <- nPoint[1]
+                y[[length(y) + 1]] <- nPoint[2]
+                plot(x, y, type="p", ylim=c(-1,1), xlim=c(-1, 1))
                 isStillActive = TRUE
                 grid[nPointCell[1], nPointCell[2], ] = nPoint
                 activeList[[length(activeList) + 1]] <- nPoint
@@ -100,6 +102,8 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
         if(isStillActive)
             activeList[[length(activeList) + 1]] <- activePoint
     }
+
+    return (grid)
 }
 
 newPoint = function(point, minDist)
@@ -109,6 +113,8 @@ newPoint = function(point, minDist)
     angle = 2 * pi * rand[2]
     newX = point[1] + radius * cos(angle)
     newY = point[2] + radius * sin(angle)
+    newX = min(B, max(newX, A))
+    newY = min(B, max(newY, A))
 
     return (c(newX, newY))
 }
