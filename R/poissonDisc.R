@@ -69,7 +69,7 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
         for(i in c(1:30))
         {
             # Get new coordinates
-            nPoint = newPoint(activePoint, minDist)
+            nPoint = nearPoint(activePoint, minDist)
             nPointCell = pointToGridCell(nPoint, cellSize)
             delta = ceiling(minDist / cellSize) # number of cells to look up
             isOk = TRUE
@@ -106,20 +106,33 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
     return (grid)
 }
 
-newPoint = function(point, minDist)
+nearPoint = function(point, minDist)
 {
-    rand = runif(2, 0, 1)
-    radius = minDist * (rand[1] + 1)
-    angle = 2 * pi * rand[2]
-    newX = point[1] + radius * cos(angle)
-    newY = point[2] + radius * sin(angle)
-    newX = min(B, max(newX, A))
-    newY = min(B, max(newY, A))
+    dim = length(point)                 # getting dimension number
+    newPoint = c(1:dim)                 # prepare new point
+    rand = runif(dim, 0, 1)             # get randoms for calculations
+    radius = minDist * (rand[1] + 1)    # get radius for n-sphere
+    angles = c(1:(dim-1))               # vector of angles
+    sinValue = 1                        # cumulative value of sin() multiplication
 
-    return (c(newX, newY))
+    # Getting all newPoint coordinates
+    for(i in c(1:(dim-1)))
+    {
+        angles[i] = 2 * pi * rand[i+1]
+        newPoint[i] = point[i] + radius * cos(angles[i]) * sinValue
+        sinValue = sinValue * sin(angles[i])
+    }
+    newPoint[dim] = point[dim] + radius * sinValue
+
+    # Fixing coordinates
+    for(i in c(1:dim))
+        newPoint[i] = min(B, max(newPoint[i], A))
+
+    return (newPoint)
 }
+attr(newPoint, "comment") <- "Returns new point lying not further than minDist from point"
 
 getDistance = function(point1, point2)
 {
-    return (sqrt((point1[1] - point2[1])^2 + (point1[2] - point2[2])^2))
+    return (dist(rbind(point1, point2))[1])
 }
