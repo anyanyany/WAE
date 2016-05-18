@@ -1,7 +1,9 @@
-#library("cec2013");
-#source("hillClimbing.R");
-#source("getPoints.R");
-#source("randomNeighbor.R");
+library("cec2013");
+this.dir=dirname(parent.frame(2)$ofile)
+setwd(this.dir)
+source('./hillClimbing.R')
+source('./getPoints.R')
+source('./randomNeighbor.R')
 
 main=function() 
 {
