@@ -1,13 +1,14 @@
 A = -1
 B = 1
-dim = 2
 x = list()
 y = list()
 
 plotPoints = function(accuracy)
 {
     plot(A:B, A:B, type="n", ylim=c(-1.1,1))
-    grid = generatePoints(accuracy)
+    grid = generatePoints(accuracy, 2)
+    x = list()
+    y = list()
     for(i in c(1:length(grid[1,,1])))
     {
         for(j in c(1:length(grid[1,,1])))
@@ -26,31 +27,57 @@ plotPoints = function(accuracy)
 
 pointToGridCell = function(point, cellSize)
 {
-    x = point[1] - A
-    y = point[2] - A
-    x = floor(x / cellSize) + 1
-    y = floor(y / cellSize) + 1
+    gridCell = c(1:length(point))
+    for(i in c(1:length(point)))
+        gridCell[i] = floor((point[i] - A) / cellSize) + 1
 
-    return(c(x, y))
+    return(gridCell)
 }
 
-generatePoints = function(minDist)
+getGridVector = function(grid, position, dim)
 {
-    cellSize = minDist / sqrt(dim)
-    cellNum = (B - A) / cellSize
-    grid = array(c(-1, -1), dim = c(cellNum + 1, cellNum + 1, dim))
+    result = c(1:dim)
+    len = length(position) + 1
+    for(i in c(1:dim))
+    {
+        position[len] = i
+        result[i] = grid[t(position)]
+    }
+    length(position) <- (len - 1)
 
-    activeList = list()
-    initialPoint = runif(dim, A, B)
-    position = pointToGridCell(initialPoint, cellSize)
-    grid[position[1], position[2], ] = initialPoint
-    activeList[[length(activeList) + 1]] <- initialPoint
-    grid = poissonDisc(minDist, cellSize, grid, activeList)
+    return (result)
+}
+
+setGridVector = function(grid, position, dim, input)
+{
+    len = length(position) + 1
+    for(i in c(1:dim))
+    {
+        position[len] = i
+        grid[t(position)] = input[i]
+    }
+    length(position) <- (len - 1)
 
     return (grid)
 }
 
-poissonDisc = function(minDist, cellSize, grid, activeList)
+generatePoints = function(minDist, dim)
+{
+    cellSize = minDist / sqrt(dim)
+    cellNum = round((B - A) / cellSize)
+    grid = array(rep(-1, dim), dim = c(rep(cellNum + 1, dim), dim))
+
+    activeList = list()
+    initialPoint = runif(dim, A, B)
+    position = pointToGridCell(initialPoint, cellSize)
+    setGridVector(grid, position, dim, position)
+    activeList[[length(activeList) + 1]] <- initialPoint
+    grid = poissonDisc(minDist, cellSize, cellNum+1, grid, activeList, dim)
+
+    return (grid)
+}
+
+poissonDisc = function(minDist, cellSize, cellNum, grid, activeList, dim)
 {
     # Until active list is not empty
     while(length(activeList) > 0 )
@@ -62,9 +89,6 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
         activeList[[index]] = NULL
         isStillActive = FALSE
 
-        # print(it)
-        # print(listLength)
-
         # Select k neighbours for point
         for(i in c(1:30))
         {
@@ -72,30 +96,17 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
             nPoint = nearPoint(activePoint, minDist)
             nPointCell = pointToGridCell(nPoint, cellSize)
             delta = ceiling(minDist / cellSize) # number of cells to look up
-            isOk = TRUE
-            for(j in c((nPointCell[1] - delta) : (nPointCell[1] + delta)))
-            {
-                for(k in c((nPointCell[2] - delta) : (nPointCell[2] + delta)))
-                {
-                    if(j <= 0 || j > length(grid[1,,1]) || k <= 0 || k > length(grid[1,,1]) || all(grid[j, k, ] == c(-1, -1)) == TRUE)
-                        next()
-                    if(getDistance(nPoint, grid[j, k, ]) < minDist)
-                    {
-                        isOk = FALSE
-                        break()
-                    }
-                }
-                if(!isOk)
-                    break()
-            }
+            position = c(1:dim)
+            isOk = recursiveInsert(grid, cellNum, minDist, dim, nPointCell, nPoint, delta, position, 1)
 
             if(isOk)
             {
-                x[[length(x) + 1]] <- nPoint[1]
-                y[[length(y) + 1]] <- nPoint[2]
-                plot(x, y, type="p", ylim=c(-1,1), xlim=c(-1, 1))
+                #x[[length(x) + 1]] <- nPoint[1]
+                #y[[length(y) + 1]] <- nPoint[2]
+                #plot(x, y, type="p", ylim=c(-1,1), xlim=c(-1, 1))
                 isStillActive = TRUE
-                grid[nPointCell[1], nPointCell[2], ] = nPoint
+                grid = setGridVector(grid, nPointCell, dim, nPoint)
+                #grid[nPointCell[1], nPointCell[2], ] = nPoint
                 activeList[[length(activeList) + 1]] <- nPoint
             }
         }
@@ -106,8 +117,33 @@ poissonDisc = function(minDist, cellSize, grid, activeList)
     return (grid)
 }
 
+recursiveInsert = function(grid, cellNum, minDist, dim, nPointCell, nPoint, delta, position, recursion)
+{
+    if(recursion > dim)
+    {
+        # We can try to insert value
+        if(all(getGridVector(grid, position, dim) == rep(-1, dim)) == TRUE)
+           return (TRUE)
+        if(getDistance(nPoint, getGridVector(grid, position, dim)) < minDist)
+            return (FALSE)
+        return (TRUE)
+    }
+    isGood = FALSE
+    for(i in c((nPointCell[recursion] - delta) : (nPointCell[recursion] + delta)))
+    {
+        if(i < 1 || i > cellNum) next()
+        isGood = TRUE
+        position[recursion] = i
+        result = recursiveInsert(grid, cellNum, minDist, dim, nPointCell, nPoint, delta, position, recursion+1)
+        if(!result) return (FALSE)
+    }
+    return (isGood)
+}
+
 nearPoint = function(point, minDist)
 {
+    # For algorithm explanation look here:
+    # https://en.wikipedia.org/wiki/N-sphere#Spherical_coordinates
     dim = length(point)                 # getting dimension number
     newPoint = c(1:dim)                 # prepare new point
     rand = runif(dim, 0, 1)             # get randoms for calculations
