@@ -51,7 +51,7 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
 
     # points = GetPointsUniformDistribution(dim, pointCount, A, B)
     pointCount = length(points)
-    results = rep(0, 1000)
+    results = rep(0, 50)
 
     for(i in c(1:maxIt))
     {
