@@ -140,7 +140,6 @@ recursiveInsert = function(grid, cellNum, minDist, dim, nPointCell, nPoint, delt
     return (isGood)
 }
 
-attr(nearPoint, "comment") <- "Returns new point lying not further than minDist from point"
 nearPoint = function(point, minDist)
 {
     # For algorithm explanation look here:
@@ -167,6 +166,7 @@ nearPoint = function(point, minDist)
 
     return (newPoint)
 }
+attr(nearPoint, "comment") <- "Returns new point lying not further than minDist from point"
 
 getDistance = function(point1, point2)
 {

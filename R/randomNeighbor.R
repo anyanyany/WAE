@@ -1,4 +1,3 @@
-attr(randomNeighbor, "comment") <- "Returns new point lying not further than delta from point"
 randomNeighbor = function(point, delta,A,B)
 {
   # For algorithm explanation look here:
@@ -25,3 +24,4 @@ randomNeighbor = function(point, delta,A,B)
 
   return (newPoint)
 }
+attr(randomNeighbor, "comment") <- "Returns new point lying not further than delta from point"

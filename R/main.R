@@ -45,13 +45,30 @@ main=function()
 
 runTest = function(dim, func, points, minDist, maxIt, A, B)
 {
+    library(parallel)
+    coresCount = detectCores()
+    cluster = makeCluster(coresCount, outfile="")
+
     # points = GetPointsUniformDistribution(dim, pointCount, A, B)
     pointCount = length(points)
     results = rep(0, 1000)
 
     for(i in c(1:maxIt))
+    {
+        pResults = parLapply(cluster, points, function(point) {
+            library("cec2013");
+            source('./hillClimbing.R')
+            source('./getPoints.R')
+            source('./randomNeighbor.R')
+            return (hillClimbing(point, func, minDist, A, B))
+        })
         for(j in c(1:pointCount))
-            results = results + hillClimbing(points[[p]], func, minDist)
+            results = results + pResults[[j]]
+        print(paste0("Finished iteration: ", i))
+#        for(j in c(1:pointCount))
+#            results = results + hillClimbing(points[[j]], func, minDist, A, B)
+    }
+    stopCluster(cluster)
 
     results = results / (maxIt * pointCount)
 
