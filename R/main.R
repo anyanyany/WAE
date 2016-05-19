@@ -11,33 +11,28 @@ main=function()
   functions=c(1:28);
   N=10; #N-ile punktow
   delta=0.2;
-  a=-100;
-  b=100;
-  results=array(dim = c(length(dimensions),3,length(functions),N)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
+  a=-1;
+  b=1;
+  maxIt=100;
+  results=array(dim = c(length(dimensions),3,length(functions))); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
   
   for(d in dimensions)
   {
-    indx=match(d,dimensions);
+    dim=match(d,dimensions);
     startPointsUniformDistribution=GetPointsUniformDistribution(d,N,a,b);
     startPointsHyperMesh=GetPointsHyperMesh(d,N,a,b);
     startPointsPoissonDisc=GetPointsPoissonDisc(d,N,a,b);
-    for(f in functions)
+    for(func in functions)
     {
-      for(p in c(1:N))
-      {
-        point=startPointsUniformDistribution[[p]];
-        results[indx,1,f,p]=hillClimbing(point,f,delta)[1000];
-      }
-      for(p in c(1:N))
-      {
-        point=startPointsHyperMesh[[p]];
-        results[indx,2,f,p]=hillClimbing(point,f,delta)[1000];
-      }
-      for(p in c(1:N))
-      {
-        point=startPointsPoissonDisc[[p]];
-        results[indx,3,f,p]=hillClimbing(point,f,delta)[1000];
-      }
+      result=runTest(dim, func, startPointsUniformDistribution, delta, maxIt, a, b)
+      results[dim,1,func]=result[50];
+      
+      result=runTest(dim, func, startPointsHyperMesh, delta, maxIt, a, b)
+      results[dim,2,func]=result[50];
+      
+      result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
+      results[dim,3,func]=result[50];
+
     }
   }
   return (results);
