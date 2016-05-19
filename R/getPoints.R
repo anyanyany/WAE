@@ -11,9 +11,9 @@ GetPointsUniformDistribution = function(dimension,N,a,b)
 GetPointsHyperMesh = function(dimension,N,a,b)
 {
   points=list();
-  scale=ceiling(N^(1/dimension)); #podzialka siatki - sufit z pierwiastka z N stopnia dimension
+  scale=ceiling(N^(1/dimension)); #scale of mesh (because scale^dimension=N)
   if(scale<2)
-    scale=2;
+    scale=2; #we need at least 2 points on scale
   h=(b-a)/(scale-1);
   values=array(dim=scale);
   for(i in c(1:scale))
@@ -21,8 +21,8 @@ GetPointsHyperMesh = function(dimension,N,a,b)
     values[i]=a+(i-1)*h;
   }
   for(i in c(1:N)) 
-  {
-    whichValues=round(runif(dimension, 1, scale),digits=0);
+  { 
+    whichValues=round(runif(dimension, 1, scale),digits=0); #we randomly choose points from mesh 
     points[[i]]=values[whichValues];
   }
   return (points);

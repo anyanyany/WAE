@@ -13,7 +13,7 @@ main=function()
   delta=0.2;
   a=-100;
   b=100;
-  results=array(dim = c(length(dimensions),3,length(functions),N)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdek funkcji i kazdego punktu startowego
+  results=array(dim = c(length(dimensions),3,length(functions),N)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
   
   for(d in dimensions)
   {
@@ -56,4 +56,9 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
     results = results / (maxIt * pointCount)
 
     return (results)
+}
+
+showSolution=function(values)
+{
+  plot(1:length(values), values, type="l");
 }
