@@ -6,10 +6,10 @@ randomNeighbor = function(point, delta,A,B)
   dim = length(point)                 # getting dimension number
   newPoint = c(1:dim)                 # prepare new point
   rand = runif(dim, 0, 1)             # get randoms for calculations
-  radius = delta * (rand[1] + 1)    # get radius for n-sphere
+  radius = delta * rand[1]            # get radius within n-sphere
   angles = c(1:(dim-1))               # vector of angles
   sinValue = 1                        # cumulative value of sin() multiplication
-  
+
   # Getting all newPoint coordinates
   for(i in c(1:(dim-1)))
   {
@@ -18,10 +18,10 @@ randomNeighbor = function(point, delta,A,B)
     sinValue = sinValue * sin(angles[i])
   }
   newPoint[dim] = point[dim] + radius * sinValue
-  
+
   # Fixing coordinates
   for(i in c(1:dim))
     newPoint[i] = min(B, max(newPoint[i], A))
-  
+
   return (newPoint)
 }
