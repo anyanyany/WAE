@@ -42,3 +42,18 @@ main=function()
   }
   return (results);
 }
+
+runTest = function(dim, func, points, minDist, maxIt, A, B)
+{
+    # points = GetPointsUniformDistribution(dim, pointCount, A, B)
+    pointCount = length(points)
+    results = rep(0, 1000)
+
+    for(i in c(1:maxIt))
+        for(j in c(1:pointCount))
+            results = results + hillClimbing(points[[p]], func, minDist)
+
+    results = results / (maxIt * pointCount)
+
+    return (results)
+}
