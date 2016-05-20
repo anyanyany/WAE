@@ -32,9 +32,9 @@ main=function()
 
         result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
         results[dim,3,func,]=result;
-        cat("Finished dimension ", d, '\n')
+        cat("Finished function ", func, '\n')
     }
-    cat("Finished function ", f, '\n')
+    cat("Finished dimension ", d, '\n')
   }
   return (results);
 }
