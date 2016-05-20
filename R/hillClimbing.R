@@ -7,6 +7,7 @@ hillClimbing = function(x0,func,delta,A,B) {
   numberOfSavedPoints=50;
   H=array(dim=numberOfSavedPoints)
   #list of cec2013 function values for the best individual in population (we save 1000 values)
+  x0 = as.vector(x0)
   x=x0;
   H[counter]=cec2013(func,x0);
   #cat("Saved point: ", counter, "\n")

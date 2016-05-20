@@ -5,17 +5,17 @@ source('./hillClimbing.R')
 source('./getPoints.R')
 source('./randomNeighbor.R')
 
-main=function() 
+main=function()
 {
   dimensions=c(2,5,10,20,30,40,50,60,70,80,90,100);
   functions=c(1:28);
   N=10; #N-ile punktow
-  delta=0.2;
+  delta=1e-2;
   a=-1;
   b=1;
-  maxIt=100;
+  maxIt=10;
   results=array(dim = c(length(dimensions),3,length(functions))); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
-  
+
   for(d in dimensions)
   {
     dim=match(d,dimensions);
@@ -24,16 +24,17 @@ main=function()
     startPointsPoissonDisc=GetPointsPoissonDisc(d,N,a,b);
     for(func in functions)
     {
-      result=runTest(dim, func, startPointsUniformDistribution, delta, maxIt, a, b)
-      results[dim,1,func]=result[50];
-      
-      result=runTest(dim, func, startPointsHyperMesh, delta, maxIt, a, b)
-      results[dim,2,func]=result[50];
-      
-      result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
-      results[dim,3,func]=result[50];
+        result=runTest(dim, func, startPointsUniformDistribution, delta, maxIt, a, b)
+        results[dim,1,func]=result[50];
 
+        result=runTest(dim, func, startPointsHyperMesh, delta, maxIt, a, b)
+        results[dim,2,func]=result[50];
+
+        result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
+        results[dim,3,func]=result[50];
+        cat("Finished dimension ", d, '\n')
     }
+    cat("Finished function ", f, '\n')
   }
   return (results);
 }
