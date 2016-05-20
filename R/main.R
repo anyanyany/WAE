@@ -7,8 +7,8 @@ source('./randomNeighbor.R')
 
 main=function()
 {
-  dimensions=c(2,5);
-  functions=c(1:2);
+  dimensions=c(2,5,10,20,30,40,50,60,70,80,90,100);
+  functions=c(1:28);
   N=10; #N-ile punktow
   delta=1e-2;
   a=-1;
