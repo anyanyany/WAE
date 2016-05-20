@@ -14,7 +14,7 @@ main=function()
   a=-1;
   b=1;
   maxIt=10;
-  results=array(dim = c(length(dimensions),3,length(functions))); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
+  results=array(dim = c(length(dimensions),3,length(functions),50)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
 
   for(d in dimensions)
   {
@@ -25,13 +25,13 @@ main=function()
     for(func in functions)
     {
         result=runTest(dim, func, startPointsUniformDistribution, delta, maxIt, a, b)
-        results[dim,1,func]=result[50];
+        results[dim,1,func,]=result;
 
         result=runTest(dim, func, startPointsHyperMesh, delta, maxIt, a, b)
-        results[dim,2,func]=result[50];
+        results[dim,2,func,]=result;
 
         result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
-        results[dim,3,func]=result[50];
+        results[dim,3,func,]=result;
         cat("Finished dimension ", d, '\n')
     }
     cat("Finished function ", f, '\n')
