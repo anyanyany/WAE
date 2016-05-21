@@ -36,6 +36,7 @@ main=function()
     }
     cat("Finished dimension ", d, '\n')
   }
+  saveRDS(results, "C:/Users/Anna/Desktop/a.rds")
   return (results);
 }
 
@@ -73,5 +74,10 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
 
 showSolution=function(values)
 {
-  plot(1:length(values), values, type="l");
+  x1=values[1,1,1,]
+  x2=values[1,2,1,]
+  x3=values[1,3,1,]
+  plot(1:length(x1), x1, type="l",col="red");
+  lines(1:length(x2), x2, col="blue")
+  lines(1:length(x3), x3, col="green")
 }
