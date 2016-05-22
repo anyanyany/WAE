@@ -18,9 +18,14 @@ randomNeighbor = function(point, delta,A,B)
   }
   newPoint[dim] = point[dim] + radius * sinValue
 
-  # Fixing coordinates
+  # Fixing coordinates - wrapping
   for(i in c(1:dim))
-    newPoint[i] = min(B, max(newPoint[i], A))
+  {
+    if(newPoint[i]>B)
+      newPoint[i]=A+newPoint[i];
+    if(newPoint[i]<A)
+      newPoint[i]=B-newPoint[i];
+  }
 
   return (newPoint)
 }
