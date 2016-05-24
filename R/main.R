@@ -36,7 +36,7 @@ main=function()
     }
     cat("Finished dimension ", d, '\n')
   }
-  saveRDS(results, "C:/Users/Anna/Desktop/a.rds")
+  saveRDS(results, "results.rds")
   return (results);
 }
 
