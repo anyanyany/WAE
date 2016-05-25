@@ -35,10 +35,10 @@ main=function()
         #result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
         #results[dim,3,func,]=result;
         cat("Finished function ", func, '\n')
-        func_index += 1
+        func_index = func_index + 1
     }
     cat("Finished dimension ", d, '\n')
-    dim_index += 1
+    dim_index = dim_index + 1
   }
   saveRDS(results, "/home/waszka/Programy/R/WAE/R/results.rds")
   return (results);
