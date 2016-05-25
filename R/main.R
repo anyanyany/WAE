@@ -15,28 +15,32 @@ main=function()
   b=100;
   maxIt=50;
   results=array(dim = c(length(dimensions),3,length(functions),50)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
+  dim_index = 1
+  func_index = 1
 
   for(d in dimensions)
   {
     dim=match(d,dimensions);
     startPointsUniformDistribution=GetPointsUniformDistribution(d,N,a,b);
     startPointsHyperMesh=GetPointsHyperMesh(d,N,a,b);
-    startPointsPoissonDisc=GetPointsPoissonDisc(d,N,a,b);
+    #startPointsPoissonDisc=GetPointsPoissonDisc(d,N,a,b);
     for(func in functions)
     {
         result=runTest(dim, func, startPointsUniformDistribution, delta, maxIt, a, b)
-        results[dim,1,func,]=result;
+        results[dim_index,1,func_index,]=result;
 
         result=runTest(dim, func, startPointsHyperMesh, delta, maxIt, a, b)
-        results[dim,2,func,]=result;
+        results[dim_index,2,func_index,]=result;
 
-        result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
-        results[dim,3,func,]=result;
+        #result=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b)
+        #results[dim,3,func,]=result;
         cat("Finished function ", func, '\n')
+        func_index += 1
     }
     cat("Finished dimension ", d, '\n')
+    dim_index += 1
   }
-  saveRDS(results, "results.rds")
+  saveRDS(results, "/home/waszka/Programy/R/WAE/R/results.rds")
   return (results);
 }
 
