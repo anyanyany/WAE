@@ -1,11 +1,11 @@
-A = -1
-B = 1
+A = -100
+B = 100
 x = list()
 y = list()
 
 plotPoints = function(accuracy)
 {
-    plot(A:B, A:B, type="n", ylim=c(-1.1,1))
+    plot(A:B, A:B, type="n", ylim=c(A,B))
     grid = generatePoints(accuracy, 2)
     x = list()
     y = list()
@@ -103,10 +103,9 @@ poissonDisc = function(minDist, cellSize, cellNum, grid, activeList, dim)
             {
                 #x[[length(x) + 1]] <- nPoint[1]
                 #y[[length(y) + 1]] <- nPoint[2]
-                #plot(x, y, type="p", ylim=c(-1,1), xlim=c(-1, 1))
+                #plot(x, y, type="p", ylim=c(A,B), xlim=c(A, B))
                 isStillActive = TRUE
                 grid = setGridVector(grid, nPointCell, dim, nPoint)
-                #grid[nPointCell[1], nPointCell[2], ] = nPoint
                 activeList[[length(activeList) + 1]] <- nPoint
             }
         }
