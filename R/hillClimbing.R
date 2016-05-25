@@ -14,7 +14,7 @@ hillClimbing = function(x0,func,delta,A,B) {
   while(counter<numberOfSavedPoints) #we need to collect 1000 observations
   {
     y=randomNeighbor(x, delta,A,B);
-    if(cec2013(func,y)>cec2013(func,x))
+    if(cec2013(func,y)<cec2013(func,x))
       x=y;
 
     iteration=iteration+1;

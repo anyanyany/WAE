@@ -7,13 +7,13 @@ source('./randomNeighbor.R')
 
 main=function()
 {
-  dimensions=c(2,5,10,20,30,40,50,60,70,80,90,100);
-  functions=c(1:28);
+  dimensions=c(2,5,10,20,30,50);
+  functions=c(1,2,7,16,23);
   N=10; #N-ile punktow
-  delta=1e-2;
-  a=-1;
-  b=1;
-  maxIt=10;
+  delta=1e-1;
+  a=-100;
+  b=100;
+  maxIt=50;
   results=array(dim = c(length(dimensions),3,length(functions),50)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
 
   for(d in dimensions)
@@ -46,7 +46,6 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
     coresCount = detectCores()
     cluster = makeCluster(coresCount, outfile="")
 
-    # points = GetPointsUniformDistribution(dim, pointCount, A, B)
     pointCount = length(points)
     results = rep(0, 50)
 
@@ -62,8 +61,6 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
         for(j in c(1:pointCount))
             results = results + pResults[[j]]
         print(paste0("Finished iteration: ", i))
-#        for(j in c(1:pointCount))
-#            results = results + hillClimbing(points[[j]], func, minDist, A, B)
     }
     stopCluster(cluster)
 
