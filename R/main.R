@@ -16,13 +16,13 @@ main=function()
   maxIt=50;
   results=array(dim = c(length(dimensions),3,length(functions),50)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
   dim_index = 1
-  func_index = 1
 
   for(d in dimensions)
   {
     dim=match(d,dimensions);
     startPointsUniformDistribution=GetPointsUniformDistribution(d,N,a,b);
     startPointsHyperMesh=GetPointsHyperMesh(d,N,a,b);
+    func_index = 1
     #startPointsPoissonDisc=GetPointsPoissonDisc(d,N,a,b);
     for(func in functions)
     {
