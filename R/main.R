@@ -7,7 +7,7 @@ source('./randomNeighbor.R')
 
 main=function()
 {
-  dimensions=c(2,5,10,20,30,50);
+  dimensions=c(2,5,10,20);
   functions=c(1,2,7,16,23);
   N=10; #N-ile punktow
   delta=1;
@@ -73,12 +73,3 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
     return (results)
 }
 
-showSolution=function(values)
-{
-  x1=values[1,1,1,]
-  x2=values[1,2,1,]
-  x3=values[1,3,1,]
-  plot(1:length(x1), x1, type="l",col="red");
-  lines(1:length(x2), x2, col="blue")
-  lines(1:length(x3), x3, col="green")
-}
