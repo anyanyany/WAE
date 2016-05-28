@@ -13,8 +13,7 @@ main=function()
   delta=1;
   a=-100;
   b=100;
-  maxIt=2;
-  numberOfSavedPoints=100;
+  maxIt=20;
   dim_index = 1
 
   for(d in dimensions)
