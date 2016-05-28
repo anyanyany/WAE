@@ -8,13 +8,14 @@ source('./randomNeighbor.R')
 main=function()
 {
   dimensions=c(2,5,10,20);
-  functions=c(1,2,7,16,23);
+  functions=c(7,9,11,15,20);
   N=10; #N-ile punktow
   delta=1;
   a=-100;
   b=100;
   maxIt=50;
-  results=array(dim = c(length(dimensions),3,length(functions),50)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
+  numberOfSavedPoints=100;
+  results=array(0,dim = c(length(dimensions),3,length(functions),numberOfSavedPoints)); #najepsza wartosc funkcji celu dla kazdego wymiaru, kazdego sposobu wyboru pkt startowych, kazdej funkcji i kazdego punktu startowego
   dim_index = 1
 
   for(d in dimensions)
@@ -40,7 +41,7 @@ main=function()
     cat("Finished dimension ", d, '\n')
     dim_index = dim_index + 1
   }
-  saveRDS(results, "/home/waszka/Programy/R/WAE/R/results.rds")
+  saveRDS(results, "D:/results.rds")
   return (results);
 }
 
@@ -51,7 +52,7 @@ runTest = function(dim, func, points, minDist, maxIt, A, B)
     cluster = makeCluster(coresCount, outfile="")
 
     pointCount = length(points)
-    results = rep(0, 50)
+    results = rep(0, 100)
 
     for(i in c(1:maxIt))
     {

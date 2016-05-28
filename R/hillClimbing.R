@@ -4,7 +4,7 @@ maxIterations = 100
 hillClimbing = function(x0,func,delta,A,B) {
   counter=1;
   iteration=0;
-  numberOfSavedPoints=50;
+  numberOfSavedPoints=100;
   H=array(dim=numberOfSavedPoints)
   #list of cec2013 function values for the best individual in population (we save 1000 values)
   x0 = as.vector(x0)
