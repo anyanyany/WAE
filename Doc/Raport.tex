@@ -87,7 +87,7 @@ while !stop
 \end{lstlisting}
 
 
-\textbf{Dodatkowo zaimplementowany algorytm co 100 iteracji (czyli co 100 losowań nowego punktu sąsiadującego z najlepszym dotychczas znalezionym rozwiązaniem) zapisuje wartość funkcji celu dla najlepszego osobnika. Warunkiem stopu jest uzyskanie 100 obserwacji.}\\
+\textbf{Dodatkowo zaimplementowany algorytm zapisuje wartość funkcji celu dla każdego osobnika. Warunkiem stopu jest osiągnięcie ektremum globalnego, bądź zatrzymanie się w lokalnym ekstremum na czas 100 iteracji.}\\
 
 Funkcja \textit{randomNeighbor(x, $\delta$)} zwraca losowy punkt w sąsiedztwie $x$-a, znajdujący się w odległości nie większej niż $\delta$ od $x$-a. Do obliczania odległości stosowana jest metryka euklidesowa. W przypadku wygenerowania punktu, który znajdue się poza dopuszczalnym obszarem, jest on korygowany przy pomocy metody zawijania.\\
 
