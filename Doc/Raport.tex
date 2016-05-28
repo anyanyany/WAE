@@ -87,7 +87,7 @@ while !stop
 \end{lstlisting}
 
 
-\textbf{Dodatkowo zaimplementowany algorytm co 100 iteracji (czyli co 100 losowań nowego punktu sąsiadującego z najlepszym dotychczas znalezionym rozwiązaniem) zapisuje wartość funkcji celu dla najlepszego osobnika. Warunkiem stopu jest uzyskanie 50 obserwacji.}\\
+\textbf{Dodatkowo zaimplementowany algorytm co 100 iteracji (czyli co 100 losowań nowego punktu sąsiadującego z najlepszym dotychczas znalezionym rozwiązaniem) zapisuje wartość funkcji celu dla najlepszego osobnika. Warunkiem stopu jest uzyskanie 100 obserwacji.}\\
 
 Funkcja \textit{randomNeighbor(x, $\delta$)} zwraca losowy punkt w sąsiedztwie $x$-a, znajdujący się w odległości nie większej niż $\delta$ od $x$-a. Do obliczania odległości stosowana jest metryka euklidesowa. W przypadku wygenerowania punktu, który znajdue się poza dopuszczalnym obszarem, jest on korygowany przy pomocy metody zawijania.\\
 
@@ -111,7 +111,7 @@ Technika Poisson Disc generuje zbiór punktów o zadanej liczności w n-wymiarow
 \section{Przebieg eksperymentów}
 
 Funkcja cec2013 dostarczona w ramach pakietu CEC2013 przyjmuje dwa argumenty: punkt oraz numer funkcji wykorzystanej do obliczenia wartości funkcji celu dla podanego punktu. Dostępne funkcje numerowane są od 1 do 28, a podany punkt musi być punktem z przestrzeni o wymiarze 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90 lub 100. Daje to 336 doświadczeń, które dodatkowo przeprowadzane są dla każdej z trzech strategii losowania punktów startowych, co daje 1008 eksperymentów. Liczba doświadczeń przez nas przeprowadzonych jest jednak mniejsza ze względu na dużą złożoność czasową obliczeń. Ponadto generowanie punktów metodą Poisson Disc zrealizowane jest tylko dla przestrzeni 2 i 5-wymiarowej ze względu na bardzo dużą złożoność pamięciową.\\
-\textbf{Do eksperymentów zostały wybrane wymiary: 2, 5, 10, 20 oraz funkcje: 1, 2, 7, 16, 23.} Poniższa tabela przedstawia wartości minimalne wybranych funkcji (realizujemy problem minimaizacji).\\
+\textbf{Do eksperymentów zostały wybrane wymiary: 2, 5, 10 oraz funkcje: 1, 8, 12, 3.} Poniższa tabela przedstawia wartości ekstremów globalnych wybranych funkcji (realizujemy problem minimaizacji).\\
 \begin{center}
 \begin{tabular}{|r|r|}
   \hline 
@@ -119,26 +119,52 @@ Funkcja cec2013 dostarczona w ramach pakietu CEC2013 przyjmuje dwa argumenty: pu
   \hline 
   1 & -1400\\
   \hline
-  2 & -1400 \\
+  8 & -700 \\
   \hline
-  7 & -800 \\
+  12 & -300 \\
   \hline
-  16 & 200 \\
+  3 & -1200 \\
   \hline
-  23 & 900 \\
-  \hline 
-  
 \end{tabular}
 \end{center}
 Funkcje te zostały wybrane na podstawie analizy poniższego dokumentu, który zawiera opisy i wizualizacje wszystkich dostępnych w pakiecie funkcji:\\
-\url{http://www.ntu.edu.sg/home/EPNSugan/index_files/CEC2013/Definitions%20of%20%20CEC%2013%20benchmark%20suite%200117.pdf}
+\url{http://www.ntu.edu.sg/home/EPNSugan/index_files/CEC2013/Definitions%20of%20%20CEC%2013%20benchmark%20suite%200117.pdf} \\
+Pierwsze dwie wybrane funkcje (1 i 8) mają dobrze widoczne ekstremum globalne, funkcja 12 jest funkcją nietrywialną z wielona ekstremami lokalnymi, natomiast funkcja 3 jest płaska na znaczącej części przestrzeni.
+\newpage
+Poniższe szkice przedstawiają wykresy wybranych funkcji:\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{1}
+\caption{Wykres funkcji nr 1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{8}
+\caption{Wykres funkcji nr 8}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{12}
+\caption{Wykres funkcji nr 12}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{3}
+\caption{Wykres funkcji nr 3}
+\end{figure}
 \newpage
 Ogólna postać głównego algorytmu:\\
 \begin{lstlisting}[mathescape][language=R]
-dimensions $\leftarrow$ c(2,5,10,20);
-functions $\leftarrow$ c(1,2,7,16,23);
-N $\leftarrow$ 10; 
+dimensions $\leftarrow$ c(2,5,10);
+functions $\leftarrow$ c(1,8,12,3);
 foreach d in dimensions
+    NumberOfPoints $\leftarrow$ 10*d;
     S1 $\leftarrow$ starting points set - uniform distribution;
     S2 $\leftarrow$ starting points set - hyper mesh;
     S3 $\leftarrow$ starting points set - poisson disc;
