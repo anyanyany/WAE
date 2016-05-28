@@ -1,29 +1,34 @@
 #classical hill climbing algorithm
-maxIterations = 100
-
-hillClimbing = function(x0,func,delta,A,B,numberOfSavedPoints) {
+hillClimbing = function(x0,func,delta,A,B,extreme) {
   counter=1;
-  iteration=0;
-  #numberOfSavedPoints=100;
-  H=array(dim=numberOfSavedPoints)
-  #list of cec2013 function values for the best individual in population (we save numberOfSavedPoints values)
+  H=list();
+  #list of cec2013 function values for the best individual in population 
   x0 = as.vector(x0)
   x=x0;
-  H[counter]=cec2013(func,x0);
-  #cat("Saved point: ", counter, "\n")
-  while(counter<numberOfSavedPoints) #we need to collect numberOfSavedPoints observations
+  H[[counter]]=cec2013(func,x0);
+  repeats=0;
+  while(TRUE) 
   {
+    if(abs(H[[counter]] - extreme) < 0.5) #if it's almost extreme - we can stop
+      break;
     y=randomNeighbor(x, delta,A,B);
     if(cec2013(func,y)<cec2013(func,x))
       x=y;
 
-    iteration=iteration+1;
-    if((iteration%%maxIterations)==0) #we save observation every 100 iterations
+    counter=counter+1;
+    H[[counter]]=cec2013(func,x);
+    
+    if(H[[counter]]==H[[counter-1]])
     {
-      counter=counter+1;
-      H[counter]=cec2013(func,x);
-      #cat("Saved point: ", counter, "\n")
+      repeats=repeats+1;
     }
+    else
+    {
+      repeats=0;
+    }
+    
+    if(repeats==100) #if value doesn't change long time - break
+      break;
   }
   return (H);
 }

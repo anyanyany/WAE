@@ -1,4 +1,4 @@
-drawPlots=function(values)
+drawPlots=function()
 {
   dimensions=c(2,5,10);
   functions=c(1,8,12,3);
@@ -9,15 +9,39 @@ drawPlots=function(values)
     func_index = 1
     for(func in functions)
     {
-      UniformDistribution=values[dim_index,1,func_index,];
-      HyperMesh=values[dim_index,2,func_index,];
-      #PoissonDisc=values[dim_index,3,func_index,];
+      path=paste0('D:/result__dim_',d,'__func_',func,'.rds',collapse = NULL);
+      results=readRDS(path);
       
-      path=paste0('D:/PROJECTS/WAE/R/Plots/dim_',d,'__func_',func,'.jpg',collapse = NULL)
+      maxLen=0;
+      for(i in c(1:length(results)))
+      {
+        if(length(results[[i]])>maxLen)
+          maxLen=length(results[[i]]);
+      }
+
+      minValue=Inf;
+      maxValue=-Inf;
+      
+      for(i in c(1:length(results)))
+      {
+        for(j in c(1:length(results[[i]])))
+        {
+            if(results[[i]][[j]]<minValue)
+              minValue=results[[i]][[j]];
+            if(results[[i]][[j]]>maxValue)
+              maxValue=results[[i]][[j]];
+        }
+      }
+      
+      path=paste0('D:/Plots/dim_',d,'__func_',func,'.jpg',collapse = NULL)
       jpeg(path)
-      plot(1:length(UniformDistribution), UniformDistribution, type="l",col="red", xlab="point", ylab="function value",main=paste0('dimension=',d,' function=',func,collapse = NULL));
-      lines(1:length(HyperMesh), HyperMesh, col="blue")
-      #lines(1:length(PoissonDisc), PoissonDisc, col="green")
+      plot(x=NULL, y=NULL,xlab="succeeding points", ylab="value of cec2013",xlim=c(1, maxLen), ylim=c(minValue, maxValue),main=paste0('dimension=',d,' function=',func,collapse = NULL));
+      
+      lines(1:length(results[[1]]), results[[1]], col="red")
+      lines(1:length(results[[2]]), results[[2]], col="green")
+      if(length(results)>2)
+        lines(1:length(results[[3]]), results[[3]], col="blue")
+      
       dev.off()
       
       func_index = func_index + 1

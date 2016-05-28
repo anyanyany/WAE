@@ -25,6 +25,71 @@ plotPoints = function(accuracy)
     plot(x, y, type="p")
 }
 
+GetPointsPoissonDisc2D = function(accuracy)
+{
+  grid = generatePoints(accuracy, 2)
+  x = list()
+  y = list()
+  for(i in c(1:length(grid[1,,1])))
+  {
+    for(j in c(1:length(grid[1,,1])))
+    {
+      if(all(grid[i, j,] == c(-1, -1)) == FALSE)
+      {
+        point = grid[i, j, ]
+        x[[length(x) + 1]] <- point[1]
+        y[[length(y) + 1]] <- point[2]
+      }
+    }
+  }
+  points=list();
+  for(i in c(1:length(x)))
+  {
+    points[[i]]=c(x[[i]],y[[i]]);
+  }
+  return (points);
+}
+
+GetPointsPoissonDisc5D = function(accuracy)
+{
+  grid = generatePoints(accuracy, 5)
+  x = list()
+  y = list()
+  z = list()
+  u = list()
+  v = list()
+  for(i in c(1:length(grid[1,,1,1,1,1])))
+  {
+    for(j in c(1:length(grid[1,,1,1,1,1])))
+    {
+      for(k in c(1:length(grid[1,,1,1,1,1])))
+      {
+        for(l in c(1:length(grid[1,,1,1,1,1])))
+        {
+          for(m in c(1:length(grid[1,,1,1,1,1])))
+          {
+            if(all(grid[i, j, k, l, m, ] == c(-1, -1, -1, -1, -1)) == FALSE)
+            {
+              point = grid[i, j, k, l, m, ]
+              x[[length(x) + 1]] <- point[1]
+              y[[length(y) + 1]] <- point[2]
+              z[[length(z) + 1]] <- point[3]
+              u[[length(u) + 1]] <- point[4]
+              v[[length(v) + 1]] <- point[5]
+            }
+          }
+        }
+      }
+    }
+  }
+  points=list();
+  for(i in c(1:length(x)))
+  {
+    points[[i]]=c(x[[i]],y[[i]],z[[i]],u[[i]],v[[i]]);
+  }
+  return (points);
+}
+
 pointToGridCell = function(point, cellSize)
 {
     gridCell = c(1:length(point))
