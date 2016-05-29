@@ -1,7 +1,7 @@
 drawPlots=function()
 {
   dimensions=c(2,5,10);
-  functions=c(1,8,12,3);
+  functions=c(1,8,12,6);
   
   dim_index = 1;
   for(d in dimensions)

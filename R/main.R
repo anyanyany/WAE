@@ -8,8 +8,8 @@ source('./randomNeighbor.R')
 main=function()
 {
   dimensions=c(2,5,10);
-  functions=c(1,8,12,3);
-  globalExtremes=c(-1400,-700,-300,-1200);
+  functions=c(1,8,12,6);
+  globalExtremes=c(-1400,-700,-300,-900);
   delta=1;
   a=-100;
   b=100;
