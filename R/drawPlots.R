@@ -33,6 +33,19 @@ drawPlots=function()
         }
       }
       
+      
+      for(i in c(1:length(results)))
+      {
+        for(j in c(1:maxLen))
+        {
+          if(j>length(results[[i]]))
+          {
+            results[[i]][[j]]=results[[i]][[j-1]];
+          }
+        }
+      }
+      
+      
       path=paste0('D:/Plots/dim_',d,'__func_',func,'.jpg',collapse = NULL)
       jpeg(path)
       plot(x=NULL, y=NULL,xlab="succeeding points", ylab="value of cec2013",xlim=c(1, maxLen), ylim=c(minValue, maxValue),main=paste0('dimension=',d,' function=',func,collapse = NULL));
