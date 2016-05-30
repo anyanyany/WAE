@@ -7,7 +7,7 @@ source('./randomNeighbor.R')
 
 main=function()
 {
-  dimensions=c(2,5,10);
+  dimensions=c(10);
   functions=c(1,8,12,6);
   globalExtremes=c(-1400,-700,-300,-900);
   delta=1;
@@ -36,7 +36,7 @@ main=function()
         {
           results[[3]]=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b,extreme)
         }
-        path=paste0('D:/result__dim_',d,'__func_',func,'.rds',collapse = NULL);
+        path=paste0('/home/waszka/Programy/R/WAE/R/Results/result__dim_',d,'__func_',func,'.rds',collapse = NULL);
         saveRDS(results, path)
         
         cat("Finished function ", func, '\n')
