@@ -85,9 +85,7 @@ while !stop
 	if cec2013(i, y) < cec2013(i, x)
 		x $\leftarrow$ y
 \end{lstlisting}
-
-
-\textbf{Dodatkowo zaimplementowany algorytm zapisuje wartość funkcji celu dla każdego osobnika. Warunkiem stopu jest osiągnięcie ektremum globalnego, bądź zatrzymanie się w lokalnym ekstremum na czas 100 iteracji.}\\
+Dodatkowo zaimplementowany algorytm zapisuje wartość funkcji celu dla każdego osobnika. Warunkiem stopu jest osiągnięcie ektremum globalnego, bądź zatrzymanie się w lokalnym ekstremum na czas 100 iteracji.\\
 
 Funkcja \textit{randomNeighbor(x, $\delta$)} zwraca losowy punkt w sąsiedztwie $x$-a, znajdujący się w odległości nie większej niż $\delta$ od $x$-a. Do obliczania odległości stosowana jest metryka euklidesowa. W przypadku wygenerowania punktu, który znajdue się poza dopuszczalnym obszarem, jest on korygowany przy pomocy metody zawijania.\\
 
@@ -111,7 +109,7 @@ Technika Poisson Disc generuje zbiór punktów o zadanej liczności w n-wymiarow
 \section{Przebieg eksperymentów}
 
 Funkcja cec2013 dostarczona w ramach pakietu CEC2013 przyjmuje dwa argumenty: punkt oraz numer funkcji wykorzystanej do obliczenia wartości funkcji celu dla podanego punktu. Dostępne funkcje numerowane są od 1 do 28, a podany punkt musi być punktem z przestrzeni o wymiarze 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90 lub 100. Daje to 336 doświadczeń, które dodatkowo przeprowadzane są dla każdej z trzech strategii losowania punktów startowych, co daje 1008 eksperymentów. Liczba doświadczeń przez nas przeprowadzonych jest jednak mniejsza ze względu na dużą złożoność czasową obliczeń. Ponadto generowanie punktów metodą Poisson Disc zrealizowane jest tylko dla przestrzeni 2 i 5-wymiarowej ze względu na bardzo dużą złożoność pamięciową.\\
-\textbf{Do eksperymentów zostały wybrane wymiary: 2, 5, 10 oraz funkcje: 1, 8, 12, 6.} Poniższa tabela przedstawia wartości ekstremów globalnych wybranych funkcji (realizujemy problem minimaizacji).\\
+Do eksperymentów zostały wybrane wymiary: 2, 5, 10 oraz funkcje: 1, 8, 12, 6. Poniższa tabela przedstawia wartości ekstremów globalnych wybranych funkcji (realizujemy problem minimaizacji).\\
 \begin{center}
 \begin{tabular}{|r|r|}
   \hline 
@@ -179,7 +177,7 @@ Ponieważ testowana metoda jest niedeterministyczna, każde doświadczenie jest 
 
 
 \section{Wyniki eksperymentów}
-Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszych osobników w populacji. Kolorem czerwonym zaznaczono wyniki dla metody z losowaniem punktów startowych z rozkładem równomiernym, kolorem zielonym - metodę z przeszukiwaniem po hipersiatce, a kolorem niebieskim - metodę bazującą na Poisson Disc.
+Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszych osobników w populacji. Kolorem czerwonym zaznaczono wyniki dla metody z losowaniem punktów startowych z rozkładem równomiernym, kolorem zielonym - metodę z przeszukiwaniem po hipersiatce, a kolorem niebieskim - metodę bazującą na Poisson Disc. Dla każdej z funkcji przedstawione zostały 3 wykresy (dla każdego z trzech rozpatrywanych wymiarowości przestrzeni), przy czym na wykresach dla wymiaru 10 zwizualizowano wyniki dla dwóch metod losowania punktów startowych (metoda z losowaniem punktów startowych z rozkładem równomiernym oraz metoda z przeszukiwaniem po hipersiatce).
 
 \subsection{Funkcja nr 1}
 
@@ -259,12 +257,16 @@ Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszyc
 \caption{Wyniki dla funkcji 6 i wymiaru 5}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{dim_10__func_6}
+\caption{Wyniki dla funkcji 6 i wymiaru 10}
+\end{figure}
 
 \section{Wnioski}
 
-Na podstawie przeprowadzonych eksperymentów z pewnością możemy stwierdzić, że wielokrotne uruchomienie algorytmu wspinaczkowego z różnych punktów startowych przyczynia się do uzyskania lepszych wyników, niż rozpatrzenie jednego punktu startowego. Takie podejście zwiększa szanse na to, że globalne ekstremum zostanie osiągnięte i zmniejsza ryzyko napotkania lokalnych ekstremów.\\
-
-Wyniki przeprowadzonych doświadczeń pokazują, że najbardziej efektywną metodą wyboru punktów startowych jest...
+Na podstawie przeprowadzonych eksperymentów z pewnością możemy stwierdzić, że wielokrotne uruchomienie algorytmu wspinaczkowego z różnych punktów startowych przyczynia się do uzyskania lepszych wyników, niż rozpatrzenie jednego punktu startowego. Takie podejście zwiększa szanse na to, że globalne ekstremum zostanie osiągnięte i zmniejsza ryzyko zatrzymania się w ekstremum lokalnym.\\
+Wyniki przeprowadzonych doświadczeń pokazują, że metoda wyboru punktów startowych powinna być uzależniona od funkcji celu, nie można jednoznacznie stwierdzić, że pewna konkretna metoda będzie dawała najlepsze wyniki dla wszystkich funkcji.
 
 
 \end{document}
