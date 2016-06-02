@@ -36,7 +36,7 @@ main=function()
         {
           results[[3]]=runTest(dim, func, startPointsPoissonDisc, delta, maxIt, a, b,extreme)
         }
-        path=paste0('/home/waszka/Programy/R/WAE/R/Results/result__dim_',d,'__func_',func,'.rds',collapse = NULL);
+        path=paste0('result__dim_',d,'__func_',func,'.rds',collapse = NULL);
         saveRDS(results, path)
         
         cat("Finished function ", func, '\n')
