@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{color}
 
 \usepackage{booktabs}% http://ctan.org/pkg/booktabs
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
@@ -177,7 +178,7 @@ Ponieważ testowana metoda jest niedeterministyczna, każde doświadczenie jest 
 
 
 \section{Wyniki eksperymentów}
-Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszych osobników w populacji. Kolorem czerwonym zaznaczono wyniki dla metody z losowaniem punktów startowych z rozkładem równomiernym, kolorem zielonym - metodę z przeszukiwaniem po hipersiatce, a kolorem niebieskim - metodę bazującą na Poisson Disc. Dla każdej z funkcji przedstawione zostały 3 wykresy (dla każdego z trzech rozpatrywanych wymiarowości przestrzeni), przy czym na wykresach dla wymiaru 10 zwizualizowano wyniki dla dwóch metod losowania punktów startowych (metoda z losowaniem punktów startowych z rozkładem równomiernym oraz metoda z przeszukiwaniem po hipersiatce).
+Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszych osobników w populacji. Kolorem \textcolor{red}{czerwonym} zaznaczono wyniki dla metody z losowaniem punktów startowych z rozkładem \textcolor{red}{równomiernym}, kolorem \textcolor{green}{zielonym} - metodę z przeszukiwaniem po \textcolor{green}{hipersiatce}, a kolorem \textcolor{blue}{niebieskim} - metodę bazującą na \textcolor{blue}{Poisson Disc}. Dla każdej z funkcji przedstawione zostały 3 wykresy (dla każdego z trzech rozpatrywanych wymiarowości przestrzeni), przy czym na wykresach dla wymiaru 10 zwizualizowano wyniki dla dwóch metod losowania punktów startowych (metoda z losowaniem punktów startowych z rozkładem równomiernym oraz metoda z przeszukiwaniem po hipersiatce).
 \newpage
 
 \subsection{Funkcja nr 1}
@@ -242,7 +243,7 @@ Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszyc
 
 \section{Wnioski}
 
-Na podstawie przeprowadzonych eksperymentów z pewnością możemy stwierdzić, że wielokrotne uruchomienie algorytmu wspinaczkowego z różnych punktów startowych przyczynia się do uzyskania lepszych wyników, niż rozpatrzenie jednego punktu startowego. Takie podejście zwiększa szanse na to, że globalne ekstremum zostanie osiągnięte i zmniejsza ryzyko zatrzymania się w ekstremum lokalnym.\\
+Na podstawie przeprowadzonych eksperymentów z pewnością możemy stwierdzić, że wielokrotne uruchomienie algorytmu wspinaczkowego z różnych punktów startowych przyczynia się do uzyskania lepszych wyników, niż rozpatrzenie jednego punktu startowego. Takie podejście zwiększa szanse na to, że globalne ekstremum zostanie osiągnięte i zmniejsza ryzyko odnalezienia tylko ekstremum lokalnego.\\
 Wyniki przeprowadzonych doświadczeń pokazują, że metoda wyboru punktów startowych powinna być uzależniona od funkcji celu, nie można jednoznacznie stwierdzić, że pewna konkretna metoda będzie dawała najlepsze wyniki dla wszystkich funkcji.
 
 
