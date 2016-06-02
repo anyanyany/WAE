@@ -85,7 +85,7 @@ while !stop
 	if cec2013(i, y) < cec2013(i, x)
 		x $\leftarrow$ y
 \end{lstlisting}
-Dodatkowo zaimplementowany algorytm zapisuje wartość funkcji celu dla każdego osobnika. Warunkiem stopu jest osiągnięcie ektremum globalnego, bądź zatrzymanie się w lokalnym ekstremum na czas 100 iteracji.\\
+Dodatkowo zaimplementowany algorytm zapisuje wartość funkcji celu dla każdego osobnika. Warunkiem stopu jest osiągnięcie ektremum globalnego, bądź zatrzymanie się w lokalnym ekstremum na czas 100 iteracji.
 
 Funkcja \textit{randomNeighbor(x, $\delta$)} zwraca losowy punkt w sąsiedztwie $x$-a, znajdujący się w odległości nie większej niż $\delta$ od $x$-a. Do obliczania odległości stosowana jest metryka euklidesowa. W przypadku wygenerowania punktu, który znajdue się poza dopuszczalnym obszarem, jest on korygowany przy pomocy metody zawijania.\\
 
@@ -178,90 +178,67 @@ Ponieważ testowana metoda jest niedeterministyczna, każde doświadczenie jest 
 
 \section{Wyniki eksperymentów}
 Poniższe wykresy przedstawiają wartości funkcji celu dla kolejnych najlepszych osobników w populacji. Kolorem czerwonym zaznaczono wyniki dla metody z losowaniem punktów startowych z rozkładem równomiernym, kolorem zielonym - metodę z przeszukiwaniem po hipersiatce, a kolorem niebieskim - metodę bazującą na Poisson Disc. Dla każdej z funkcji przedstawione zostały 3 wykresy (dla każdego z trzech rozpatrywanych wymiarowości przestrzeni), przy czym na wykresach dla wymiaru 10 zwizualizowano wyniki dla dwóch metod losowania punktów startowych (metoda z losowaniem punktów startowych z rozkładem równomiernym oraz metoda z przeszukiwaniem po hipersiatce).
+\newpage
 
 \subsection{Funkcja nr 1}
 
-
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
-\includegraphics[scale=0.6]{dim_2__func_1}
-\caption{Wyniki dla funkcji 1 i wymiaru 2}
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_2__func_1}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_5__func_1}
+\endminipage\hfill
+\includegraphics[scale=0.40]{dim_10__func_1}
+\caption{Wyniki dla funkcji 1 i poszczególnych wymiarów}
 \end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_5__func_1}
-\caption{Wyniki dla funkcji 1 i wymiaru 5}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_10__func_1}
-\caption{Wyniki dla funkcji 1 i wymiaru 10}
-\end{figure}
+\newpage
 
 \subsection{Funkcja nr 8}
 
-
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
-\includegraphics[scale=0.6]{dim_2__func_8}
-\caption{Wyniki dla funkcji 8 i wymiaru 2}
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_2__func_8}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_5__func_8}
+\endminipage\hfill
+\includegraphics[scale=0.40]{dim_10__func_8}
+\caption{Wyniki dla funkcji 8 i poszczególnych wymiarów}
 \end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_5__func_8}
-\caption{Wyniki dla funkcji 8 i wymiaru 5}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_10__func_8}
-\caption{Wyniki dla funkcji 8 i wymiaru 10}
-\end{figure}
+\newpage
 
 \subsection{Funkcja nr 12}
 
-
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
-\includegraphics[scale=0.6]{dim_2__func_12}
-\caption{Wyniki dla funkcji 12 i wymiaru 2}
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_2__func_12}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_5__func_12}
+\endminipage\hfill
+\includegraphics[scale=0.40]{dim_10__func_12}
+\caption{Wyniki dla funkcji 12 i poszczególnych wymiarów}
 \end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_5__func_12}
-\caption{Wyniki dla funkcji 12 i wymiaru 5}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_10__func_12}
-\caption{Wyniki dla funkcji 12 i wymiaru 10}
-\end{figure}
+\newpage
 
 \subsection{Funkcja nr 6}
 
-
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
-\includegraphics[scale=0.6]{dim_2__func_6}
-\caption{Wyniki dla funkcji 6 i wymiaru 2}
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_2__func_6}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{dim_5__func_6}
+\endminipage\hfill
+\includegraphics[scale=0.40]{dim_10__func_6}
+\caption{Wyniki dla funkcji 6 i poszczególnych wymiarów}
 \end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_5__func_6}
-\caption{Wyniki dla funkcji 6 i wymiaru 5}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{dim_10__func_6}
-\caption{Wyniki dla funkcji 6 i wymiaru 10}
-\end{figure}
+\newpage
 
 \section{Wnioski}
 
