@@ -9,7 +9,7 @@ drawPlots=function()
     func_index = 1
     for(func in functions)
     {
-      path=paste0('D:/result__dim_',d,'__func_',func,'.rds',collapse = NULL);
+      path=paste0('result__dim_',d,'__func_',func,'.rds',collapse = NULL);
       results=readRDS(path);
       
       maxLen=0;
@@ -46,7 +46,7 @@ drawPlots=function()
       }
       
       
-      path=paste0('D:/Plots/dim_',d,'__func_',func,'.jpg',collapse = NULL)
+      path=paste0('Plot__dim_',d,'__func_',func,'.jpg',collapse = NULL)
       jpeg(path)
       plot(x=NULL, y=NULL,xlab="succeeding points", ylab="value of cec2013",xlim=c(1, maxLen), ylim=c(minValue, maxValue),main=paste0('dimension=',d,' function=',func,collapse = NULL));
       
