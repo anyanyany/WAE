@@ -166,9 +166,6 @@ poissonDisc = function(minDist, cellSize, cellNum, grid, activeList, dim)
 
             if(isOk)
             {
-                #x[[length(x) + 1]] <- nPoint[1]
-                #y[[length(y) + 1]] <- nPoint[2]
-                #plot(x, y, type="p", ylim=c(A,B), xlim=c(A, B))
                 isStillActive = TRUE
                 grid = setGridVector(grid, nPointCell, dim, nPoint)
                 activeList[[length(activeList) + 1]] <- nPoint
